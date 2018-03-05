@@ -6,11 +6,12 @@ This sample project can be used as a starting point for testing connectivity fro
 
 1. Start the Sauce Connect proxy
 
-    Download the latest version of Sauce Connect.  For instructions on how to download and start Sauce Connect, visit this link: [https://wiki.saucelabs.com/display/DOCS/Basic+Sauce+Connect+Proxy+Setup]().
+    Download the latest version of Sauce Connect.  For instructions on how to download and start Sauce Connect, visit this link: https://wiki.saucelabs.com/display/DOCS/Basic+Sauce+Connect+Proxy+Setup.
 
     Start the Sauce Connect proxy and wait for the message indicating the tunnel is connected and ready for tests:
 
     ```
+    $ sc --user=${SAUCE_USERNAME} --api-key=${SAUCE_ACCESS_KEY}
     5 Mar 13:10:49 - Sauce Connect 4.4.12, build 3905 74cd761 -dirty
     5 Mar 13:10:49 - Using CA certificate bundle /etc/ssl/certs/ca-bundle.crt.
     5 Mar 13:10:49 - Using CA certificate verify path /etc/ssl/certs.
