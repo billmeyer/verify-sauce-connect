@@ -89,6 +89,16 @@ Here's an example from the test suite included in this git repo:
 
 See `src/test/java/com/saucelabs/example/VerifySauceConnectTest.java` for more details.
 
+#### Executing the automated test suite
+
+Our test suite requires a few inputs so it can a) know the tunnel ID we want to use and b) know the hostname and port number of the internal host where our sample web site is running.  We can supply these to the test suite via the following environment variables:
+
+* SAUCE_TUNNEL_ID - The tunnel ID we wish to use.  In these example, we've been using `mytunnel1`
+* INTERNAL_TEST_HOST - Specify the hostname where our sample maven project is downloaded and running in step 2 above.  Defaults to `localhost`
+* INTERNAL_TEST_PORT - The port our sample website is listening on.  Defaults to `8080`
+
+Once these environment variables are set, we can execute our test suite:
+
 The sample test suite can be executed with:
 
 ```
