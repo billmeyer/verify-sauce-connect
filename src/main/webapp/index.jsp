@@ -31,37 +31,37 @@
                     <tbody>
                         <tr>
                             <th>Requested URL:</th>
-                            <td><%= HttpUtils.getRequestURL(request) %>
+                            <td id="requestedURL"><%= HttpUtils.getRequestURL(request) %>
                             </td>
                         </tr>
                         <tr>
                             <th>Request method:</th>
-                            <td><%= request.getMethod() %>
+                            <td id="requestMethod"><%= request.getMethod() %>
                             </td>
                         </tr>
                         <tr>
                             <th>Request URI:</th>
-                            <td><%= request.getRequestURI() %>
+                            <td id="requestURI"><%= request.getRequestURI() %>
                             </td>
                         </tr>
                         <tr>
                             <th>Request protocol:</th>
-                            <td><%= request.getProtocol() %>
+                            <td id="requestProtocol"><%= request.getProtocol() %>
                             </td>
                         </tr>
                         <tr>
                             <th>Servlet path:</th>
-                            <td><%= request.getServletPath() %>
+                            <td id="servletPath"><%= request.getServletPath() %>
                             </td>
                         </tr>
                         <tr>
                             <th>Path info:</th>
-                            <td><%= request.getPathInfo() %>
+                            <td id="pathInfo"><%= request.getPathInfo() %>
                             </td>
                         </tr>
                         <tr>
                             <th>Path translated:</th>
-                            <td><%= request.getPathTranslated() %>
+                            <td id="pathTranslated"><%= request.getPathTranslated() %>
                             </td>
                         </tr>
                         <tr>
@@ -76,42 +76,42 @@
                         </tr>
                         <tr>
                             <th>Content length:</th>
-                            <td><%= request.getContentLength() %>
+                            <td id="contentLength"><%= request.getContentLength() %>
                             </td>
                         </tr>
                         <tr>
                             <th>Content type:</th>
-                            <td><%= request.getContentType() %>
+                            <td id="contentType"><%= request.getContentType() %>
                             </td>
                         </tr>
                         <tr>
                             <th>Server name:</th>
-                            <td><%= request.getServerName() %>
+                            <td id="serverName"><%= request.getServerName() %>
                             </td>
                         </tr>
                         <tr>
                             <th>Server port:</th>
-                            <td><%= request.getServerPort() %>
+                            <td id="serverPort"><%= request.getServerPort() %>
                             </td>
                         </tr>
                         <tr>
                             <th>Remote user:</th>
-                            <td><%= request.getRemoteUser() %>
+                            <td id="remoteUser"><%= request.getRemoteUser() %>
                             </td>
                         </tr>
                         <tr>
                             <th>Remote address:</th>
-                            <td><%= request.getRemoteAddr() %>
+                            <td id="remoteAddress"><%= request.getRemoteAddr() %>
                             </td>
                         </tr>
                         <tr>
                             <th>Remote host:</th>
-                            <td><%= request.getRemoteHost() %>
+                            <td id="remoteHost"><%= request.getRemoteHost() %>
                             </td>
                         </tr>
                         <tr>
                             <th>Authorization scheme:</th>
-                            <td><%= request.getAuthType() %>
+                            <td id="authorizationScheme"><%= request.getAuthType() %>
                             </td>
                         </tr>
 

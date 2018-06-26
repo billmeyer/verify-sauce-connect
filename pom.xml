@@ -22,21 +22,34 @@
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.9.8</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.saucelabs</groupId>
-            <artifactId>sauce_java_common</artifactId>
-            <version>2.1.23</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>3.9.1</version>
             <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.appium/java-client -->
+        <dependency>
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+            <version>5.0.4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-client -->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-client</artifactId>
+            <version>3.5.0.Final</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>25.1-jre</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.codehaus.cargo/cargo-maven2-plugin -->
         <dependency>
@@ -49,87 +62,51 @@
 
     <build>
         <plugins>
-            <!-- Use failsafe to run integration tests -->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-failsafe-plugin</artifactId>-->
-                <!--<version>2.17</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<goals>-->
-                            <!--<goal>integration-test</goal>-->
-                            <!--<goal>verify</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
 
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-surefire-plugin</artifactId>-->
-                <!--<version>2.20.1</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<phase>integration-test</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>test</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<excludes>-->
-                                <!--<exclude>none</exclude>-->
-                            <!--</excludes>-->
-                            <!--<includes>-->
-                                <!--<include>**/*IntegrationTest.java</include>-->
-                            <!--</includes>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20.1</version>
+                <configuration>
+                    <!--<skipTests>true</skipTests>-->
+                </configuration>
+            </plugin>
 
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
                 <version>1.6.7</version>
+                <!-- https://codehaus-cargo.github.io/cargo/Maven2+Plugin+Reference+Guide.html -->
                 <configuration>
-                    <container>
-                        <containerId>jetty8x</containerId>
-                        <type>embedded</type>
-                    </container>
                     <configuration>
                         <properties>
                             <cargo.servlet.port>8080</cargo.servlet.port>
                         </properties>
                     </configuration>
-                    <!--<deployer>-->
-                        <!--<type>embedded</type>-->
-                        <!--<deployables>-->
-                            <!--<deployable>-->
-                                <!--<groupId>com.saucelabs</groupId>-->
-                                <!--<type>war</type>-->
-                                <!--<artifactId>verify-sauce-connect</artifactId>-->
-                                <!--<properties>-->
-                                    <!--<context>/sc</context>-->
-                                <!--</properties>-->
-                            <!--</deployable>-->
-                        <!--</deployables>-->
-                    <!--</deployer>-->
+                    <container>
+                        <containerId>jetty9x</containerId>
+                        <type>embedded</type>
+                    </container>
+                    <deployables>
+                        <deployable>
+                            <groupId>com.saucelabs</groupId>
+                            <type>war</type>
+                            <artifactId>verify-sauce-connect</artifactId>
+                            <properties>
+                                <context>/verify-sauce-connect</context>
+                            </properties>
+                        </deployable>
+                    </deployables>
                 </configuration>
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>start-server</id>-->
-                        <!--<phase>pre-integration-test</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>start</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                    <!--<execution>-->
-                        <!--<id>stop-server</id>-->
-                        <!--<phase>post-integration-test</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>stop</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
             </plugin>
         </plugins>
     </build>
