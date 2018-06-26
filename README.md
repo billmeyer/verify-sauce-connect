@@ -6,7 +6,7 @@ This sample project can be used as a starting point for testing connectivity fro
 
 ### Prerequisites
 
-Follow the instructions located at [https://wiki.saucelabs.com/display/DOCS/Basic+Sauce+Connect+Proxy+Setup]().  Most importantly, this link will provide instruction for:
+Follow the instructions located at https://wiki.saucelabs.com/display/DOCS/Basic+Sauce+Connect+Proxy+Setup.  Most importantly, this link will provide instruction for:
 
  * Whitelisting the appropriate IP address ranges for the Sauce Cloud,
  * Downloading the most current release of Sauce Connect.
@@ -26,7 +26,7 @@ Once the IP white lists are put in place and Sauce Connect is downloaded, procee
     where:
     
     * `${SAUCE_USERNAME}` is username (or email address) user to sign into the Sauce Labs dashboard,
-    * `${SAUCE_ACCESS_KEY}` is the access key.  This can be found by signing into [https://saucelabs.com](), clicking on your user name in the top right corner, selecting __My Account__.  The __Access Key__ is found about half way down the web page,
+    * `${SAUCE_ACCESS_KEY}` is the access key.  This can be found by signing into https://saucelabs.com, clicking on your user name in the top right corner, selecting __My Account__.  The __Access Key__ is found about half way down the web page,
     * `mytunnel1` is a user-friendly name to give the tunnel.
 
 2. Wait for the tunnel to completely start
@@ -69,7 +69,7 @@ To verify Sauce Connect using this sample web app, follow these steps:
 
         $ mvn org.codehaus.cargo:cargo-maven2-plugin:run
 
-3. Sign into [saucelabs.com]() and start a **Live Testing** session and navigate to your hostname and this specific URI:
+3. Sign into https://saucelabs.com and start a **Live Testing** session and navigate to your hostname and this specific URI:
 
     ```
         http://<yourhostname>:8080/verify-sauce-connect
