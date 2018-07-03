@@ -13,9 +13,11 @@ Follow the instructions located at https://wiki.saucelabs.com/display/DOCS/Basic
  
 Once the IP white lists are put in place and Sauce Connect is downloaded, proceed to the next section.  
 
-### Start Sauce Connect
+### Start Sauce Connect for accessing Desktop VMs, Emulators and Simulators
+
+This section walks you through the steps to start the Sauce Connect proxy for connections to Desktop VMs, Emulators, and Simulators.  Real Device access requires a separate method for starting Sauce Connect described in the next section.
     
-1. Start the Sauce Connect proxy
+1. Start the Sauce Connect proxy for Desktop VMs, Emulators, and Simulators
 
     To start the Sauce Connect proxy, use the following command:
 
@@ -25,11 +27,11 @@ Once the IP white lists are put in place and Sauce Connect is downloaded, procee
 
     where:
     
-    * `${SAUCE_USERNAME}` is username (or email address) user to sign into the Sauce Labs dashboard,
+    * `${SAUCE_USERNAME}` is the username (or email address) used to sign into the Sauce Labs dashboard at https://saucelabs.com.
     * `${SAUCE_ACCESS_KEY}` is the access key.  This can be found by signing into https://saucelabs.com, clicking on your user name in the top right corner, selecting __My Account__.  The __Access Key__ is found about half way down the web page,
     * `mytunnel1` is a user-friendly name to give the tunnel.
 
-2. Wait for the tunnel to completely start
+2. Wait for Sauce Connect to completely start
 
     The Sauce Connect start up will be complete when you see `Sauce Connect is up, you may start your tests.` in the output:
 
@@ -39,7 +41,7 @@ Once the IP white lists are put in place and Sauce Connect is downloaded, procee
     5 Mar 13:10:49 - Using CA certificate bundle /etc/ssl/certs/ca-bundle.crt.
     5 Mar 13:10:49 - Using CA certificate verify path /etc/ssl/certs.
     5 Mar 13:10:49 - Starting up; pid 6199
-    5 Mar 13:10:49 - Command line arguments: sc
+    5 Mar 13:10:49 - Command line arguments: sc ...
     5 Mar 13:10:49 - Log file: /tmp/sc.log
     5 Mar 13:10:49 - Pid file: /tmp/sc_client.pid
     5 Mar 13:10:49 - Timezone: CST GMT offset: -6h
@@ -55,6 +57,55 @@ Once the IP white lists are put in place and Sauce Connect is downloaded, procee
     5 Mar 13:11:17 - Sauce Connect is up, you may start your tests.
     ```     
 
+### Start Sauce Connect for accessing Real Devices (mobile)
+
+This section walks you through the steps to start the Sauce Connect proxy for connections to the Real Device cloud.
+
+1. Start the Sauce Connect proxy for Real Device (mobile):
+
+    To start the Sauce Connect proxy, use the following command:
+
+    ```
+    $ sc --user=${RDC_USERNAME} --api-key=${RDC_SAUCE_CONNECT_API_KEY} --tunnel-identifier ${RDC_TUNNEL_ID} --rest-url=https://us1.api.testobject.com/sc/rest/v1
+    ```
+
+    where:
+    
+    * `${RDC_USERNAME}` is the username (or email address) used to sign into the TestObject dashboard at https://app.testobject.com.
+    * `${RDC_SAUCE_CONNECT_API_KEY}` is the access key.  This can be found by signing into https://app.testobject.com, clicking on __Account__ in the top right corner, selecting __Account Settings__ &rarr; __Sauce Connect__.  Copy the __API Key__ value,
+    * `mytunnel1` is a user-friendly name to give the tunnel.
+
+2. Wait for Sauce Connect to completely start
+
+    The Sauce Connect start up will be complete when you see `Sauce Connect is up, you may start your tests.` in the output:
+
+    ```
+    $ sc --user=${RDC_USERNAME} --api-key=${RDC_SAUCE_CONNECT_API_KEY} --tunnel-identifier ${RDC_TUNNEL_ID} --rest-url=https://us1.api.testobject.com/sc/rest/v1
+    3 Jul 09:07:19 - Sauce Connect 4.4.12, build 3905 74cd761 -n -dirty
+    3 Jul 09:07:19 - Using CA certificate verify path /etc/ssl/certs.
+    3 Jul 09:07:19 - Starting up; pid 11674
+    3 Jul 09:07:19 - Command line arguments: ./sc ...
+    3 Jul 09:07:19 - Log file: /var/folders/xn/6l1n3sqj3ylcvwbjftq_yrt00000gn/T/sc-my-rdc-tunnel.log
+    3 Jul 09:07:19 - Pid file: /tmp/sc_client-my-rdc-tunnel.pid
+    3 Jul 09:07:19 - Timezone: CDT GMT offset: -5h
+    3 Jul 09:07:19 - Using no proxy for connecting to Sauce Labs REST API.
+    3 Jul 09:07:19 - Error in checkUpdate: error querying from https://us1.api.testobject.com/versions.json, error was: <html><body><h1>503 Service Unavailable</h1>
+    No server is available to handle this request.
+    </body></html>
+    . HTTP status: 503 Service Unavailable
+    3 Jul 09:07:19 - Started scproxy on port 49383.
+    3 Jul 09:07:19 - Please wait for 'you may start your tests' to start your tests.
+    3 Jul 09:07:25 - Secure remote tunnel VM provisioned.
+    3 Jul 09:07:25 - Tunnel ID: 174c348f-83fa-4d11-bb82-04c2e51096f5
+    3 Jul 09:07:25 - Using no proxy for connecting to tunnel VM.
+    3 Jul 09:07:25 - Starting Selenium listener...
+    3 Jul 09:07:25 - Establishing secure TLS connection to tunnel...
+    3 Jul 09:07:25 - Selenium listener started on port 4445.
+    3 Jul 09:07:35 - Sauce Connect is up, you may start your tests.
+    ```    
+
+    NOTE: The error `Error in checkUpdate: error querying from https://us1.api.testobject.com/versions.json ...` can be ignored and will be removed from the next release of Sauce Connect.
+
 ### Verify Connectivity with a Sample Web App and Live Testing
 
 This git repo contains a sample web application that can be used to verify connectivity from the device under test on the Sauce Cloud to your private network where the Sauce Connect proxy is running.
@@ -69,7 +120,14 @@ To verify Sauce Connect using this sample web app, follow these steps:
 
         $ mvn org.codehaus.cargo:cargo-maven2-plugin:run
 
-3. Sign into https://saucelabs.com and start a **Live Testing** session and navigate to your hostname and this specific URI:
+3. Verify Connectivity.
+
+    * To verify connectivity from Desktop VMs, Emulators, and Simulators, sign into https://saucelabs.com and start a **Live Testing** session.  
+
+    * To verify connectivity from the Real Device cloud, sign into https://app.testobject.com, create a Web-based Mobile App supplying the URL of the hostname you wish test and start a **Live Testing** session.
+        NOTE: Be sure to select your tunnel instance in the __Sauce Connect Tunnel__ dropdown.
+
+4. Navigate to your hostname and this specific URI:
 
     ```
         http://<yourhostname>:8080/verify-sauce-connect
