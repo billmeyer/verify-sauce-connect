@@ -75,7 +75,13 @@ This section walks you through the steps to start the Sauce Connect proxy for co
     * `${RDC_SAUCE_CONNECT_API_KEY}` is the access key.  This can be found by signing into https://app.testobject.com, clicking on __Account__ in the top right corner, selecting __Account Settings__ &rarr; __Sauce Connect__.  Copy the __API Key__ value,
     * `mytunnel1` is a user-friendly name to give the tunnel.
 
-2. Wait for Sauce Connect to completely start
+    NOTE: The __${RDC_SAUCE_CONNECT_API_KEY}__ is the __API Key__ used by the __Sauce Connect__ proxy.  It is **not** the same API Key used by your applications.
+
+2. Accept the Sauce Connect disclaimer
+
+    As one-time task, you must accept the __Sauce Connect for Public Cloud__ disclaimer found under the __SAUCE CONNECT__ tab of your __Account Settings__.  To do so, sign into https://app.testobject.com, click on __Account__ in the top right corner, selecting __Account Settings__ &rarr; __Sauce Connect__.  At the bottom of the screen, you will to click the __Enable Sauce Connect for Public Cloud__ button.
+
+3. Wait for Sauce Connect to completely start
 
     The Sauce Connect start up will be complete when you see `Sauce Connect is up, you may start your tests.` in the output:
 
