@@ -48,7 +48,7 @@ public class DriverFactory
         caps.setCapability("version", version);
 
         Date startDate = new Date();
-        caps.setCapability("name", String.format("Verify Sauce Connect - %s [%s]", caps.getBrowserName(), startDate));
+        caps.setCapability("name", "Verify Sauce Connect");
 
         RemoteWebDriver driver;
 
@@ -113,7 +113,10 @@ public class DriverFactory
             URL url = null;
             try
             {
+                // For local testing...
 //                url = new URL("http://localhost:4444/wd/hub");
+
+                // For connecting to Sauce Labs...
                 url = new URL("https://ondemand.saucelabs.com:443/wd/hub");
             }
             catch (MalformedURLException ignored)
@@ -125,7 +128,6 @@ public class DriverFactory
         String sessionId = driver.getSessionId().toString();
         Util.log("Started %s, session ID=%s.\n", new Date().toString(), sessionId);
 
-        // Need page load timeout because of lingering request to https://pixel.jumptap.com taking 78+ seconds
         driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
         driver.manage().timeouts().setScriptTimeout(15, TimeUnit.SECONDS);
 
