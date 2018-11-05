@@ -1,7 +1,6 @@
 package com.saucelabs.example;
 
 import com.saucelabs.example.pages.VerifySauceConnectPage;
-import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
@@ -16,10 +15,6 @@ import java.net.MalformedURLException;
  */
 public class VerifySauceConnectTest
 {
-    protected final String userName = Util.getenv("SAUCE_USERNAME");
-    protected final String accessKey = Util.getenv("SAUCE_ACCESS_KEY");
-    protected final String sauceTunnelId = Util.getenv("SAUCE_TUNNEL_ID");
-    protected final String rdcTunnelId = Util.getenv("RDC_TUNNEL_ID");
     protected final String internalTestHost = Util.getenv("INTERNAL_TEST_HOST", "localhost");
     protected final String internalTestPort = Util.getenv("INTERNAL_TEST_PORT", "8080");
     protected final String requestUrl = String.format("http://%s:%s/verify-sauce-connect/index.jsp", internalTestHost, internalTestPort);
@@ -41,42 +36,21 @@ public class VerifySauceConnectTest
     @Test
     public void testDesktop()
     {
-        MutableCapabilities addlCaps = new MutableCapabilities();
-
-        if (sauceTunnelId != null)
-        {
-            addlCaps.setCapability("tunnelIdentifier", sauceTunnelId);
-        }
-
-        RemoteWebDriver driver = DriverFactory.getDriverInstance(BrowserType.EDGE, "14.14393", "Windows 10", addlCaps);
+        RemoteWebDriver driver = DriverFactory.getDriverInstance(BrowserType.EDGE, "14.14393", "Windows 10");
         execTest(driver);
     }
 
     //    @Test
     public void testIOS()
     {
-        MutableCapabilities addlCaps = new MutableCapabilities();
-
-        if (sauceTunnelId != null)
-        {
-            addlCaps.setCapability("tunnelIdentifier", rdcTunnelId);
-        }
-
-        RemoteWebDriver driver = DriverFactory.getMobileDriverInstance("iPhone 6", BrowserType.IPHONE, "11.3", addlCaps);
+        RemoteWebDriver driver = DriverFactory.getMobileDriverInstance("iPhone 6", BrowserType.IPHONE, "11.3");
         execTest(driver);
     }
 
     //    @Test
     public void testAndroid()
     {
-        MutableCapabilities addlCaps = new MutableCapabilities();
-
-        if (sauceTunnelId != null)
-        {
-            addlCaps.setCapability("tunnelIdentifier", rdcTunnelId);
-        }
-
-        RemoteWebDriver driver = DriverFactory.getMobileDriverInstance("Google Pixel 2 XL", BrowserType.ANDROID, "8.1", addlCaps);
+        RemoteWebDriver driver = DriverFactory.getMobileDriverInstance("Google Pixel 2 XL", BrowserType.ANDROID, "8.1");
         execTest(driver);
     }
 

@@ -29,6 +29,8 @@ public class DriverFactory
     protected static final String userName = System.getenv("SAUCE_USERNAME");
     protected static final String accessKey = System.getenv("SAUCE_ACCESS_KEY");
     protected static final String toAccessKey = System.getenv("TESTOBJECT_API_KEY");
+    protected static final String sauceTunnelId = Util.getenv("SAUCE_TUNNEL_ID");
+    protected static final String rdcTunnelId = Util.getenv("RDC_TUNNEL_ID");
 
     public static RemoteWebDriver getDriverInstance(String browser, String version)
     {
@@ -101,6 +103,7 @@ public class DriverFactory
             // See https://wiki.saucelabs.com/display/DOCS/Test+Configuration+Options for all capabilities...
             caps.setCapability("username", userName);
             caps.setCapability("accesskey", accessKey);
+            caps.setCapability("tunnelIdentifier", sauceTunnelId);
             caps.setCapability("tags", "QATeam");
             caps.setCapability("recordVideo", "true");
             caps.setCapability("recordScreenshots", "true");
@@ -145,7 +148,7 @@ public class DriverFactory
         options.setExperimentalOption("mobileEmulation", mobileEmulation);
 
         Date startDate = new Date();
-        options.setCapability("name", String.format("Verify Sauce Connect - %s [%s]", options.getBrowserName(), startDate));
+        options.setCapability("name", "Verify Sauce Connect");
 
         RemoteWebDriver driver = new ChromeDriver(options);
 
@@ -215,6 +218,7 @@ public class DriverFactory
         else
         {
             caps.setCapability("testobject_api_key", toAccessKey);
+            caps.setCapability("tunnelIdentifier", rdcTunnelId);
             caps.setCapability("appiumVersion", "1.8.0");
             caps.setCapability("deviceOrientation", "portrait");
             caps.setCapability("recordVideo", "true");
@@ -251,7 +255,6 @@ public class DriverFactory
         String sessionId = driver.getSessionId().toString();
         Util.log("Started %s, session ID=%s.\n", new Date().toString(), sessionId);
 
-        // Need page load timeout because of lingering request to https://pixel.jumptap.com taking 78+ seconds
         driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
         driver.manage().timeouts().setScriptTimeout(15, TimeUnit.SECONDS);
 
