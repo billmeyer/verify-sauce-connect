@@ -26,10 +26,13 @@ import java.util.concurrent.TimeUnit;
 
 public class DriverFactory
 {
+    // For Sauce Labs Desktop testing...
     protected static final String userName = System.getenv("SAUCE_USERNAME");
     protected static final String accessKey = System.getenv("SAUCE_ACCESS_KEY");
-    protected static final String toAccessKey = System.getenv("TESTOBJECT_API_KEY");
     protected static final String sauceTunnelId = Util.getenv("SAUCE_TUNNEL_ID");
+
+    // For Sauce Labs Real Device Testing...
+    protected static final String toAccessKey = System.getenv("TESTOBJECT_API_KEY");
     protected static final String rdcTunnelId = Util.getenv("RDC_TUNNEL_ID");
 
     public static RemoteWebDriver getDriverInstance(String browser, String version)
